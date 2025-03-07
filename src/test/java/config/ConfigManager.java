@@ -11,21 +11,21 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigManager {
-	
- private static Properties properties = new Properties();
-     
-	 static {
-		 try {
+
+	private static Properties properties = new Properties();
+
+	static {
+		try {
 			FileInputStream file = new FileInputStream(new File("./src/test/resources/utils/Config.properties"));
 			properties.load(file);
 		} catch (IOException e) {
 			throw new RuntimeErrorException(null, "Failed to load configuration file due to " + e.getMessage());
 		}
-		 
-	 }
-	 
-	 public static String getProperty(String KeyName) {
-		 return properties.getProperty(KeyName);
-	 }
+
+	}
+
+	public static String getProperty(String KeyName) {
+		return properties.getProperty(KeyName);
+	}
 
 }
