@@ -17,7 +17,6 @@ import org.hamcrest.Matchers;
 public class BookingSteps extends BaseAPI {
 
 	public static int bookingId;
-	public static String storedFirstName;
 	public static String storedLastName;
 
 	@Given("I am a customer trying to create a booking")
@@ -27,9 +26,6 @@ public class BookingSteps extends BaseAPI {
 
 	@When("I provide the following booking details and submit the booking request")
 	public void sendBookingDetails(DataTable BookingDetails) {
-		Map<String, String> data = BookingDetails.asMap(String.class, String.class);
-		storedFirstName = data.get("firstname");
-		storedLastName = data.get("lastname");
 		response = APIUtils.sendPostWithBasicAuth("", "", "", APIUtils.convertToJSON(BookingDetails));
 	}
 
@@ -45,8 +41,10 @@ public class BookingSteps extends BaseAPI {
 	}
 
 	@Given("I have already booked a hotel room and received a booking ID")
-	public void getBookingId() {
-		bookingId = Integer.parseInt(response.jsonPath().getString("bookingid"));
+	public void getBookingId(DataTable fetchBookingId) {
+		Map<String,Integer> Bookingdetails = fetchBookingId.asMap(String.class, Integer.class);
+		bookingId = Bookingdetails.get("bookingid");
+		//bookingId = Integer.parseInt(response.jsonPath().getString("bookingid"));
 		MatcherAssert.assertThat("Invalid Bookingid-->Booking ID is not a valid int32, Please check!", bookingId,
 				Matchers.allOf(Matchers.greaterThanOrEqualTo(Integer.MIN_VALUE),
 						Matchers.lessThanOrEqualTo(Integer.MAX_VALUE)));
@@ -67,13 +65,16 @@ public class BookingSteps extends BaseAPI {
 	}
 
 	@Then("I should receive the correct booking information")
-	public void bookingDetailsCorrectlyRetrieved() {
-		String responseFirstName = response.jsonPath().getString("firstname");
-		String responseLastName = response.jsonPath().getString("lastname");
+	public void bookingDetailsCorrectlyRetrieved(DataTable bookingDetails) {
+        Map<String, String> PersonDetails = bookingDetails.asMap(String.class, String.class );
+		String responseFirstName = PersonDetails.get("firstname");
+		String responseLastName = PersonDetails.get("lastname");
+		String RetrievedFirstName = response.jsonPath().getString("firstname");
+		String RetrievedLastName = response.jsonPath().getString("lastname");
 		MatcherAssert.assertThat("X First name mismatch-->Please check!", responseFirstName.trim(),
-				Matchers.equalTo(storedFirstName.trim()));
+				Matchers.equalTo(RetrievedFirstName.trim()));
 		MatcherAssert.assertThat("X Last name mismatch-->Please check!", responseLastName.trim(),
-				Matchers.equalTo(storedLastName.trim()));
+				Matchers.equalTo(RetrievedLastName.trim()));
 	}
 
 	@Then("I should receive a {int} error code and the message {string}")

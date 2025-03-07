@@ -7,9 +7,9 @@ import io.cucumber.testng.CucumberOptions;
 
 @CucumberOptions(features = "src/test/resources/feature", 
                   glue = { "steps","hooks" },
-		          tags = "@NegativeTest7", 
-		          plugin = { "pretty","com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
-				    "rerun:src/test/resources/retry.txt" }, 
+		    	  plugin = { "pretty","html:target/cucumber.html",
+		        		    "json:target/cucumber.json" }, 
+				  tags = "@GetDetails",
 		          monochrome = true)
 
 public class RunTest extends AbstractTestNGCucumberTests {

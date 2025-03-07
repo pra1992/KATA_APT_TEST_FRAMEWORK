@@ -6,24 +6,24 @@ Background:
 @BookingProcess 
 Scenario: Successfully Create a Booking with Complete Details 
 	When I provide the following booking details and submit the booking request 
-		|bookingid|3600|
-		|roomid|127|
-		|firstname|Rajesh|
-		|lastname| Krishnamurthy|
+		|bookingid|36022|
+		|roomid|142|
+		|firstname|Raghunath|
+		|lastname| Palanisamy|
 		|depositpaid|true|
-		|email|rajeshkrishnamurthy@gmail.com|
-		|phone|78420369871270|
-		|checkin|2025-03-14|
-		|checkout|2025-03-15|
+		|email|raghunathpalani@gmail.com|
+		|phone|784203698712852|
+		|checkin|2025-03-15|
+		|checkout|2025-03-22|
 	Then Booking is confirmed with a success message 
 	
 	
-@BookingProcess 
-Scenario: Retrieve and Confirm Booking Details Using Booking ID 
-	Given I have already booked a hotel room and received a booking ID 
-	When I request to view the details of my booking using the booking ID 
-	Then I should receive a successful confirmation for the booking details 
-	And I should receive the correct booking information 
+# @BookingProcess 
+# Scenario: Retrieve and Confirm Booking Details Using Booking ID 
+# 	Given I have already booked a hotel room and received a booking ID 
+# 	When I request to view the details of my booking using the booking ID 
+# 	Then I should receive a successful confirmation for the booking details 
+# 	And I should receive the correct booking information 
 	
 @BookingProcessMandatoryInputs 
 Scenario: Booking with Mandatory Fields Only 
@@ -124,7 +124,7 @@ Scenario: Booking with Invalid Room ID
 	When I provide the following booking details and submit the booking request 
 		|bookingid|-1|
 		|roomid|74|
-		|firstname|Andy|
+		|firstname|Grand|
 		|lastname|Flower|
 		|depositpaid|true|
 		|email|andyflowert@gmail.com|
