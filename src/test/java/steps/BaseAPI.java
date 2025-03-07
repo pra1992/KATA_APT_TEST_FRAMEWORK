@@ -29,7 +29,7 @@ public class BaseAPI {
 
 		// Send POST request to get session cookie
 		Response response = RestAssured.given().contentType(ContentType.JSON).body(requestBody).post(authURL);
-
+		response.then().log().all();
 		// Extract session token from cookie
 		sessionToken = response.getCookie("token");
 

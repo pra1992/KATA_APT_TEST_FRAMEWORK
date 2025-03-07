@@ -1,0 +1,79 @@
+package steps;
+
+import io.cucumber.datatable.DataTable;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import io.restassured.RestAssured;
+import library.APIUtils;
+
+import static io.restassured.RestAssured.given;
+
+import java.util.Map;
+
+import org.hamcrest.MatcherAssert;
+import org.hamcrest.Matchers;
+
+public class BookingSteps extends BaseAPI {
+
+	public static int bookingId;
+	public static String storedFirstName;
+	public static String storedLastName;
+
+	@Given("I am a customer trying to create a booking")
+	public void setUp() {
+		request = given().log().all();
+	}
+
+	@When("I provide the following booking details and submit the booking request")
+	public void sendBookingDetails(DataTable BookingDetails) {
+		Map<String, String> data = BookingDetails.asMap(String.class, String.class);
+		storedFirstName = data.get("firstname");
+		storedLastName = data.get("lastname");
+		response = APIUtils.sendPostWithBasicAuth("", "", "", APIUtils.convertToJSON(BookingDetails));
+	}
+
+	@Then("Booking is confirmed with a success message")
+	public void verifyBookingConfirmation() {
+		response.then().log().all();
+		MatcherAssert.assertThat("Booking Failure-->Response Code is NOT 200, Please check!", response.getStatusCode(),
+				Matchers.equalTo(201));
+		MatcherAssert.assertThat("Booking Failure--> Status Message NOT EQUAL OK,Please check!",
+				APIUtils.getStatusMessage(), Matchers.equalToIgnoringCase("OK"));
+		MatcherAssert.assertThat("Booking Failure--> No Success Message, Please check!", Matchers.notNullValue(),
+				Matchers.not(Matchers.equalTo("")));
+		bookingId = Integer.parseInt(response.jsonPath().getString("bookingid"));
+	}
+
+	@Given("I have already booked a hotel room and received a booking ID")
+	public void getBookingId() {
+		MatcherAssert.assertThat("Invalid Bookingid-->Booking ID is not a valid int32, Please check!", bookingId,
+				Matchers.allOf(Matchers.greaterThanOrEqualTo(Integer.MIN_VALUE),
+						Matchers.lessThanOrEqualTo(Integer.MAX_VALUE)));
+	}
+
+	@When("I request to view the details of my booking using the booking ID")
+	public void getDetailsOfBooking() {
+		String GetEndpoint = RestAssured.baseURI + bookingId;
+		response = APIUtils.sendGetWithSession(GetEndpoint);
+		response.then().log().all();
+
+	}
+
+	@Then("I should receive a successful confirmation for the booking details")
+	public void bookingDetailsSuccessfullyRetrieved() {
+		MatcherAssert.assertThat("Unable to get the booking details-->Response Code is NOT 200, Please check!",
+				response.getStatusCode(), Matchers.equalTo(200));
+	}
+
+	@Then("I should receive the correct booking information")
+	public void bookingDetailsCorrectlyRetrieved() {
+		String responseFirstName = response.jsonPath().getString("firstname");
+		String responseLastName = response.jsonPath().getString("lastname");
+		MatcherAssert.assertThat("X First name mismatch-->Please check!", responseFirstName.trim(),
+				Matchers.equalTo(storedFirstName.trim()));
+		MatcherAssert.assertThat("X Last name mismatch-->Please check!", responseLastName.trim(),
+				Matchers.equalTo(storedLastName.trim()));
+	}
+
+}
