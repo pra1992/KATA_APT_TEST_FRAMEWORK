@@ -9,7 +9,6 @@ import io.cucumber.testng.CucumberOptions;
                   glue = { "steps","hooks" },
 		    	  plugin = { "pretty","html:target/cucumber.html",
 		        		    "json:target/cucumber.json" }, 
-				  tags = "@InvalidRetrieval",
 		          monochrome = true)
 
 public class RunTest extends AbstractTestNGCucumberTests {

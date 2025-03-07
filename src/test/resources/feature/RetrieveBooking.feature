@@ -3,18 +3,18 @@ Feature: Retrieve hotel room booking
   Background:
     Given I am a customer trying to create a booking
 
-  @GetDetails
+  @GetDetails @sanity @regression @happy
   Scenario: Retrieve and Confirm Booking Details Using Booking ID
     Given I have already booked a hotel room and received a booking ID
       | bookingid | 2 |
     When I request to view the details of my booking using the booking ID
     Then I should receive a successful confirmation for the booking details
     And I should receive the correct booking information
-      | firstname | Raghunath  |
-      | lastname  | Palanisamy |
+      | firstname | James  |
+      | lastname  | Bondd  |
 
-  @InvalidRetrieval
-  Scenario: Retrieve Booking with Invalid Booking ID
+  @unhappy @regression @invalid
+  Scenario: Retrieve Bookin g with Invalid Booking ID
     Given I have already booked a hotel room and received a booking ID
       | bookingid | -1 |
     When I request to view the details of my booking using the booking ID
