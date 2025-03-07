@@ -42,11 +42,11 @@ public class BookingSteps extends BaseAPI {
 				APIUtils.getStatusMessage(), Matchers.equalToIgnoringCase("OK"));
 		MatcherAssert.assertThat("Booking Failure--> No Success Message, Please check!", Matchers.notNullValue(),
 				Matchers.not(Matchers.equalTo("")));
-		bookingId = Integer.parseInt(response.jsonPath().getString("bookingid"));
 	}
 
 	@Given("I have already booked a hotel room and received a booking ID")
 	public void getBookingId() {
+		bookingId = Integer.parseInt(response.jsonPath().getString("bookingid"));
 		MatcherAssert.assertThat("Invalid Bookingid-->Booking ID is not a valid int32, Please check!", bookingId,
 				Matchers.allOf(Matchers.greaterThanOrEqualTo(Integer.MIN_VALUE),
 						Matchers.lessThanOrEqualTo(Integer.MAX_VALUE)));
@@ -74,6 +74,37 @@ public class BookingSteps extends BaseAPI {
 				Matchers.equalTo(storedFirstName.trim()));
 		MatcherAssert.assertThat("X Last name mismatch-->Please check!", responseLastName.trim(),
 				Matchers.equalTo(storedLastName.trim()));
+	}
+
+	@Then("I should receive a {int} error code and the message {string}")
+	public void validateMissingField(int ErrorCode, String ExpectedMessage) {
+		response.then().log().all();
+		MatcherAssert.assertThat(
+				"Can submit booking request without required information-->Response Code is NOT 400, Please check!",
+				response.getStatusCode(), Matchers.equalTo(ErrorCode));
+		String fieldError = response.jsonPath().getString("fieldErrors[0]");
+		String FailureMessage = "Failure error message mismatch! Expected: " + ExpectedMessage + ", but got: "
+				+ fieldError;
+		MatcherAssert.assertThat(FailureMessage, fieldError.trim(), Matchers.containsString(ExpectedMessage.trim()));
+	}
+
+	@Then("I should receive a {int} error code and the message {string} for invalid {string}")
+	public void validateErrorMessage(int ErrorCode, String ExpectedMessage, String InvalidFieldName) {
+		response.then().log().all();
+		MatcherAssert.assertThat(
+				"Can Submit Booking Request with invalid" + " " + InvalidFieldName
+						+ "-->Response Code is NOT 400, Please check!",
+				response.getStatusCode(), Matchers.equalTo(ErrorCode));
+		String errorMessage = response.jsonPath().getString("errorMessage");
+		// Validate that the error message contains the expected field label
+		String fieldLabelFailureMessage = "Field label mismatch! Expected: " + InvalidFieldName
+				+ ", but errorMessage does not contain it.";
+		MatcherAssert.assertThat(fieldLabelFailureMessage, errorMessage, Matchers.containsString(InvalidFieldName));
+
+		String fieldError = response.jsonPath().getString("fieldErrors[0]");
+		String FailureMessage = "Failure error message mismatch! Expected: " + ExpectedMessage + ", but got: "
+				+ fieldError;
+		MatcherAssert.assertThat(FailureMessage, fieldError.trim(), Matchers.containsString(ExpectedMessage.trim()));
 	}
 
 }

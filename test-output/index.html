@@ -26,7 +26,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 2 failed tests</span>
+      <span class="top-banner-font-1">1 suite, 1 failed test</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -51,7 +51,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\Lenovo\AppData\Local\Temp\testng-eclipse--958222127\testng-customsuite.xml</span>
+                    <span>C:\Users\Lenovo\AppData\Local\Temp\testng-eclipse--1214613800\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -93,7 +93,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">2 methods, 2 failed,   </span>
+                    <span class="method-stats">1 method, 1 failed,   </span>
                   </li>
                   <li>
                     <span class="method-list-title failed">Failed methods</span>
@@ -104,12 +104,7 @@
                     <div class="method-list-content failed suite-Default_suite">
                       <span>
                         <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="runner.RunTest" class="method navigator-link" hash-for-method="runScenario(&quot;Successfully Create a Booking with Complete Details&quot;, &quot;Hotel Room Booking&quot;)">runScenario("Successfully Create a Booking with Complete Details", "Hotel Room Booking")</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="runner.RunTest" class="method navigator-link" hash-for-method="runScenario(&quot;Retrieve and Confirm Booking Details Using Booking ID&quot;, &quot;Hotel Room Booking&quot;)">runScenario("Retrieve and Confirm Booking Details Using Booking ID", "Hotel Room Booking")</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="runner.RunTest" class="method navigator-link" hash-for-method="runScenario(&quot;Booking with Invalid Room ID&quot;, &quot;Hotel Room Booking&quot;)">runScenario("Booking with Invalid Room ID", "Hotel Room Booking")</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content failed suite-Default_suite -->
@@ -132,34 +127,16 @@
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
                 <div class="method-content">
-                  <a name="runScenario(&quot;Successfully Create a Booking with Complete Details&quot;, &quot;Hotel Room Booking&quot;)">
-                  </a> <!-- runScenario("Successfully Create a Booking with Complete Details", "Hotel Room Booking") -->
+                  <a name="runScenario(&quot;Booking with Invalid Room ID&quot;, &quot;Hotel Room Booking&quot;)">
+                  </a> <!-- runScenario("Booking with Invalid Room ID", "Hotel Room Booking") -->
                   <span class="method-name">runScenario</span>
-                  <span class="parameters">("Successfully Create a Booking with Complete Details", "Hotel Room Booking")</span>
-                  <div class="stack-trace">java.lang.AssertionError: Booking Failure--&gt;Response Code is NOT 200, Please check!
-Expected: &lt;201&gt;
-     but: was &lt;409&gt;
+                  <span class="parameters">("Booking with Invalid Room ID", "Hotel Room Booking")</span>
+                  <div class="stack-trace">java.lang.AssertionError: Can Submit Booking Request with invalid phone--&gt;Response Code is NOT 400, Please check!
+Expected: &lt;400&gt;
+     but: was &lt;201&gt;
 	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
-	at steps.BookingSteps.verifyBookingConfirmation(BookingSteps.java:39)
-	at ✽.Booking is confirmed with a success message(file:///C:/KATA_API_FRAMEWORK/RESTAPI__AUTOMATION_FRAMEWORK/src/test/resources/feature/Bookings.feature:18)
-
-</div> <!-- stack-trace -->
-                  <em>
-(Runs Cucumber Scenarios)                  </em>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
-                  <a name="runScenario(&quot;Retrieve and Confirm Booking Details Using Booking ID&quot;, &quot;Hotel Room Booking&quot;)">
-                  </a> <!-- runScenario("Retrieve and Confirm Booking Details Using Booking ID", "Hotel Room Booking") -->
-                  <span class="method-name">runScenario</span>
-                  <span class="parameters">("Retrieve and Confirm Booking Details Using Booking ID", "Hotel Room Booking")</span>
-                  <div class="stack-trace">java.lang.AssertionError: Unable to get the booking details--&gt;Response Code is NOT 200, Please check!
-Expected: &lt;200&gt;
-     but: was &lt;404&gt;
-	at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
-	at steps.BookingSteps.bookingDetailsSuccessfullyRetrieved(BookingSteps.java:65)
-	at ✽.I should receive a successful confirmation for the booking details(file:///C:/KATA_API_FRAMEWORK/RESTAPI__AUTOMATION_FRAMEWORK/src/test/resources/feature/Bookings.feature:25)
+	at steps.BookingSteps.validateErrorMessage(BookingSteps.java:94)
+	at ✽.I should receive a 400 error code and the message &quot;must be greater than or equal to 1&quot; for invalid &quot;phone&quot;(file:///C:/KATA_API_FRAMEWORK/RESTAPI__AUTOMATION_FRAMEWORK/src/test/resources/feature/Bookings.feature:134)
 
 </div> <!-- stack-trace -->
                   <em>
@@ -171,7 +148,7 @@ Expected: &lt;200&gt;
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\Lenovo\AppData\Local\Temp\testng-eclipse--958222127\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\Lenovo\AppData\Local\Temp\testng-eclipse--1214613800\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -228,20 +205,16 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(2);
+data.addRows(1);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'runScenario')
 data.setCell(0, 2, 'runner.RunTest')
-data.setCell(0, 3, 6265);
-data.setCell(1, 0, 1)
-data.setCell(1, 1, 'runScenario')
-data.setCell(1, 2, 'runner.RunTest')
-data.setCell(1, 3, 6194);
+data.setCell(0, 3, 5924);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 12 seconds</span>
+              <span class="suite-total-time">Total running time: 5 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -269,24 +242,18 @@ return data;
             <div class="chronological-class">
               <div class="chronological-class-name">runner.RunTest</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
-                <span class="method-name">setUpClass(org.testng.TestRunner@5adb0db3)</span>
+                <span class="method-name">setUpClass(org.testng.TestRunner@75d366c2)</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <img src="failed.png">
                 </img>
-                <span class="method-name">runScenario("Successfully Create a Booking with Complete Details", "Hotel Room Booking")</span>
-                <span class="method-start">880 ms</span>
-              </div> <!-- test-method -->
-              <div class="test-method">
-                <img src="failed.png">
-                </img>
-                <span class="method-name">runScenario("Retrieve and Confirm Booking Details Using Booking ID", "Hotel Room Booking")</span>
-                <span class="method-start">884 ms</span>
+                <span class="method-name">runScenario("Booking with Invalid Room ID", "Hotel Room Booking")</span>
+                <span class="method-start">715 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDownClass</span>
-                <span class="method-start">7152 ms</span>
+                <span class="method-start">6646 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->

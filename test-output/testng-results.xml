@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="2" passed="0" failed="2" skipped="0">
+<testng-results ignored="0" total="1" passed="0" failed="1" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-03-07T16:28:33 IST" name="Default suite" finished-at="2025-03-07T16:28:40 IST" duration-ms="7217">
+  <suite started-at="2025-03-07T17:43:36 IST" name="Default suite" finished-at="2025-03-07T17:43:43 IST" duration-ms="6704">
     <groups>
       <group name="cucumber">
         <method signature="AbstractTestNGCucumberTests.runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.RunTest@76505305]" name="runScenario" class="io.cucumber.testng.AbstractTestNGCucumberTests"/>
       </group> <!-- cucumber -->
     </groups>
-    <test started-at="2025-03-07T16:28:33 IST" name="Default test" finished-at="2025-03-07T16:28:40 IST" duration-ms="7217">
+    <test started-at="2025-03-07T17:43:36 IST" name="Default test" finished-at="2025-03-07T17:43:43 IST" duration-ms="6704">
       <class name="runner.RunTest">
-        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runner.RunTest@76505305]" started-at="2025-03-07T16:28:33 IST" name="setUpClass" finished-at="2025-03-07T16:28:34 IST" duration-ms="838" status="PASS">
+        <test-method is-config="true" signature="setUpClass(org.testng.ITestContext)[pri:0, instance:runner.RunTest@76505305]" started-at="2025-03-07T17:43:36 IST" name="setUpClass" finished-at="2025-03-07T17:43:37 IST" duration-ms="699" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[org.testng.TestRunner@5adb0db3]]>
+                <![CDATA[org.testng.TestRunner@75d366c2]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUpClass -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.RunTest@76505305]" started-at="2025-03-07T16:28:34 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-03-07T16:28:40 IST" duration-ms="6265" status="FAIL">
+        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.RunTest@76505305]" started-at="2025-03-07T17:43:37 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-03-07T17:43:43 IST" duration-ms="5924" status="FAIL">
           <params>
             <param index="0">
               <value>
-                <![CDATA["Successfully Create a Booking with Complete Details"]]>
+                <![CDATA["Booking with Invalid Room ID"]]>
               </value>
             </param>
             <param index="1">
@@ -36,56 +36,24 @@
           </params>
           <exception class="java.lang.AssertionError">
             <message>
-              <![CDATA[Booking Failure-->Response Code is NOT 200, Please check!
-Expected: <201>
-     but: was <409>]]>
+              <![CDATA[Can Submit Booking Request with invalid phone-->Response Code is NOT 400, Please check!
+Expected: <400>
+     but: was <201>]]>
             </message>
             <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Booking Failure-->Response Code is NOT 200, Please check!
-Expected: <201>
-     but: was <409>
+              <![CDATA[java.lang.AssertionError: Can Submit Booking Request with invalid phone-->Response Code is NOT 400, Please check!
+Expected: <400>
+     but: was <201>
 at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
-at steps.BookingSteps.verifyBookingConfirmation(BookingSteps.java:39)
-at ✽.Booking is confirmed with a success message(file:///C:/KATA_API_FRAMEWORK/RESTAPI__AUTOMATION_FRAMEWORK/src/test/resources/feature/Bookings.feature:18)
+at steps.BookingSteps.validateErrorMessage(BookingSteps.java:94)
+at ✽.I should receive a 400 error code and the message "must be greater than or equal to 1" for invalid "phone"(file:///C:/KATA_API_FRAMEWORK/RESTAPI__AUTOMATION_FRAMEWORK/src/test/resources/feature/Bookings.feature:134)
 ]]>
             </full-stacktrace>
           </exception> <!-- java.lang.AssertionError -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- runScenario -->
-        <test-method signature="runScenario(io.cucumber.testng.PickleWrapper,io.cucumber.testng.FeatureWrapper)[pri:0, instance:runner.RunTest@76505305]" started-at="2025-03-07T16:28:34 IST" name="runScenario" description="Runs Cucumber Scenarios" data-provider="scenarios" finished-at="2025-03-07T16:28:40 IST" duration-ms="6194" status="FAIL">
-          <params>
-            <param index="0">
-              <value>
-                <![CDATA["Retrieve and Confirm Booking Details Using Booking ID"]]>
-              </value>
-            </param>
-            <param index="1">
-              <value>
-                <![CDATA["Hotel Room Booking"]]>
-              </value>
-            </param>
-          </params>
-          <exception class="java.lang.AssertionError">
-            <message>
-              <![CDATA[Unable to get the booking details-->Response Code is NOT 200, Please check!
-Expected: <200>
-     but: was <404>]]>
-            </message>
-            <full-stacktrace>
-              <![CDATA[java.lang.AssertionError: Unable to get the booking details-->Response Code is NOT 200, Please check!
-Expected: <200>
-     but: was <404>
-at org.hamcrest.MatcherAssert.assertThat(MatcherAssert.java:20)
-at steps.BookingSteps.bookingDetailsSuccessfullyRetrieved(BookingSteps.java:65)
-at ✽.I should receive a successful confirmation for the booking details(file:///C:/KATA_API_FRAMEWORK/RESTAPI__AUTOMATION_FRAMEWORK/src/test/resources/feature/Bookings.feature:25)
-]]>
-            </full-stacktrace>
-          </exception> <!-- java.lang.AssertionError -->
-          <reporter-output>
-          </reporter-output>
-        </test-method> <!-- runScenario -->
-        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runner.RunTest@76505305]" started-at="2025-03-07T16:28:40 IST" name="tearDownClass" finished-at="2025-03-07T16:28:40 IST" duration-ms="15" status="PASS">
+        <test-method is-config="true" signature="tearDownClass()[pri:0, instance:runner.RunTest@76505305]" started-at="2025-03-07T17:43:43 IST" name="tearDownClass" finished-at="2025-03-07T17:43:43 IST" duration-ms="17" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDownClass -->
