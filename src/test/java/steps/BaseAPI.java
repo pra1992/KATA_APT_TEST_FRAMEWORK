@@ -17,20 +17,14 @@ public class BaseAPI {
 	}
 
 	public static String getSessionToken() {
-		// Retrieving the base url for the login step
+		
 		String authURL = ConfigManager.getProperty("Login") + "auth/login";
-
-		// Retrieving the username and password to enter into the system
 		String username = ConfigManager.getProperty("username");
 		String password = ConfigManager.getProperty("password");
-
-		// Request Payload for Login
 		String requestBody = "{ \"username\": \"" + username + "\", \"password\": \"" + password + "\" }";
 
-		// Send POST request to get session cookie
 		Response response = RestAssured.given().contentType(ContentType.JSON).body(requestBody).post(authURL);
 		response.then().log().all();
-		// Extract session token from cookie
 		sessionToken = response.getCookie("token");
 
 		if (sessionToken != null) {

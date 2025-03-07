@@ -2,18 +2,13 @@ package config;
 
 import java.io.FileInputStream;
 import java.util.Properties;
-
 import javax.management.RuntimeErrorException;
-
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.Properties;
 
 public class ConfigManager {
 
 	private static Properties properties = new Properties();
-
 	static {
 		try {
 			FileInputStream file = new FileInputStream(new File("./src/test/resources/utils/Config.properties"));
@@ -27,5 +22,4 @@ public class ConfigManager {
 	public static String getProperty(String KeyName) {
 		return properties.getProperty(KeyName);
 	}
-
 }

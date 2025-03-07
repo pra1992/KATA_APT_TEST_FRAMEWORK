@@ -42,9 +42,9 @@ public class BookingSteps extends BaseAPI {
 
 	@Given("I have already booked a hotel room and received a booking ID")
 	public void getBookingId(DataTable fetchBookingId) {
-		Map<String,Integer> Bookingdetails = fetchBookingId.asMap(String.class, Integer.class);
+		Map<String, Integer> Bookingdetails = fetchBookingId.asMap(String.class, Integer.class);
 		bookingId = Bookingdetails.get("bookingid");
-		//bookingId = Integer.parseInt(response.jsonPath().getString("bookingid"));
+		// bookingId = Integer.parseInt(response.jsonPath().getString("bookingid"));
 		MatcherAssert.assertThat("Invalid Bookingid-->Booking ID is not a valid int32, Please check!", bookingId,
 				Matchers.allOf(Matchers.greaterThanOrEqualTo(Integer.MIN_VALUE),
 						Matchers.lessThanOrEqualTo(Integer.MAX_VALUE)));
@@ -66,7 +66,7 @@ public class BookingSteps extends BaseAPI {
 
 	@Then("I should receive the correct booking information")
 	public void bookingDetailsCorrectlyRetrieved(DataTable bookingDetails) {
-        Map<String, String> PersonDetails = bookingDetails.asMap(String.class, String.class );
+		Map<String, String> PersonDetails = bookingDetails.asMap(String.class, String.class);
 		String responseFirstName = PersonDetails.get("firstname");
 		String responseLastName = PersonDetails.get("lastname");
 		String RetrievedFirstName = response.jsonPath().getString("firstname");
@@ -106,6 +106,22 @@ public class BookingSteps extends BaseAPI {
 		String FailureMessage = "Failure error message mismatch! Expected: " + ExpectedMessage + ", but got: "
 				+ fieldError;
 		MatcherAssert.assertThat(FailureMessage, fieldError.trim(), Matchers.containsString(ExpectedMessage.trim()));
+	}
+
+	@Then("I should receive an error message stating {string}")
+	public void I_should_receive_an_error_message_stating(String ExpectedMessage) {
+		String fieldError = response.jsonPath().getString("error");
+		String FailureMessage = "Failure error message mismatch! Expected: " + ExpectedMessage + ", but got: "
+				+ fieldError;
+		MatcherAssert.assertThat(FailureMessage, fieldError.trim(), Matchers.containsString(ExpectedMessage.trim()));
+
+	}
+
+	@Then("I should not be able to retrieve any record")
+	public void I_should_not_be_able_to_retrieve_any_record() {
+		MatcherAssert.assertThat(
+				"Error is not thrown upon giving invalid booking id -->Response Code is NOT 400 series, Please check!",
+				response.getStatusCode(), Matchers.greaterThanOrEqualTo(400));
 	}
 
 }

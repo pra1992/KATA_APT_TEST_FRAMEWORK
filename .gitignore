@@ -3,6 +3,7 @@
 
 # Ignore .settings directory
 .settings/
+.vscode/
 
 # Ignore .idea directory
 .idea/
